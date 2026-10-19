@@ -1,4 +1,4 @@
-"""Guiding tests: these intentionally fail until students implement weather_logic."""
+"""Guiding tests: these intentionally fail until builders implement the TODOs."""
 
 import unittest
 
