@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather Explorer Lab</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand"><span class="brand-mark">WE</span><div><p class="eyebrow">FIELD NOTEBOOK 01</p><h1>Weather Explorer <em>Lab</em></h1></div></div>
+    <div class="mode-switch"><span id="mode-label">DEMO DATA</span><button id="mode-toggle" type="button" aria-pressed="false">Switch to live</button></div>
+  </header>
+  <main>
+    <section class="hero panel">
+      <div><p class="eyebrow">BUILD · PREDICT · DISCOVER</p><h2>Your forecast, decoded.</h2><p class="hero-copy">A playful weather station for curious scientists. Search a city, spot patterns, and make your own forecast call.</p></div>
+      <div class="sun-orbit" aria-hidden="true"><span class="sun">☀</span><span class="cloud">☁</span></div>
+    </section>
+    <section class="controls panel">
+      <form id="search-form"><label for="city-input">Explore a city</label><div class="search-row"><input id="city-input" value="Kigali" autocomplete="off"><button class="primary" type="submit">Scan skies <span>↗</span></button></div></form>
+      <div id="status" class="status" role="status">Sample readings loaded.</div>
+    </section>
+    <div id="error" class="error" hidden></div>
+    <section class="current-grid">
+      <article class="current-card panel"><div class="card-top"><span class="tag">CURRENT READING</span><span id="current-icon" class="weather-icon">☀</span></div><p id="current-city" class="city-name">Kigali, Rwanda</p><div class="temperature"><span id="current-temp">24.5</span><sup>°C</sup></div><p id="current-detail">Comfortable skies with a light breeze.</p><div class="reading-strip"><span>WIND <strong id="current-wind">9.2 km/h</strong></span><span>CODE <strong id="current-code">2</strong></span></div></article>
+      <article class="forecast-card panel"><div class="card-top"><span class="tag">NEXT FIVE DAYS</span><span class="tiny-note">high / low</span></div><div id="forecast-list" class="forecast-list"></div></article>
+    </section>
+    <section class="tools-grid">
+      <article class="tool panel"><div class="tool-heading"><span class="tool-number">01</span><div><p class="eyebrow">UMBRELLA CHALLENGE</p><h3>Should you pack one?</h3></div></div><div id="umbrella-result" class="answer">Choose a city to calculate this.</div><p class="fine-print">An educational rule, not a rainfall guarantee.</p></article>
+      <article class="tool panel"><div class="tool-heading"><span class="tool-number">02</span><div><p class="eyebrow">WEATHER SCIENTIST</p><h3>Find the pattern</h3></div></div><div class="chart" id="chart" aria-label="Forecast temperature chart"></div><div id="chart-caption" class="chart-caption">Chart-ready data will appear here.</div></article>
+    </section>
+    <section class="quiz panel"><div><p class="eyebrow">FIELD QUIZ</p><h3>Can you read the sky?</h3><p id="quiz-question">What does a high precipitation probability suggest?</p></div><div class="quiz-actions"><button class="choice" data-answer="rain">Rain is more likely</button><button class="choice" data-answer="sun">The sun is guaranteed</button><span id="quiz-score" class="score">0 / 1</span></div></section>
+  </main>
+  <footer>WEATHER EXPLORER LAB <span>Python-first learning project</span></footer>
+  <script src="js/app.js"></script>
+</body>
+</html>
