@@ -6,12 +6,12 @@ A Python-first weather science project exercise. The frontend is ready to explor
 
 - The frontend works without Flask or internet access.
 - Demo data includes Kigali, Nairobi, and London.
-- Search, forecast cards, umbrella display, chart, quiz interaction, loading status, and errors work in demo mode.
+- Search, forecast cards, umbrella display, loading status, and errors work in demo mode.
 - The Flask app starts and `/api/health` works.
 
 ## What to implement
 
-The intentional `TODO 1` through `TODO 18` tasks are in `backend/weather_logic.py`, `backend/weather_service.py`, and `backend/app.py`. Each number appears once in the project. Open the matching file, read the expected result beside the TODO, write the code, and run the focused check before moving on.
+The intentional `TODO 1` through `TODO 11` tasks are in `backend/weather_logic.py`, `backend/weather_service.py`, and `backend/app.py`. Each number appears once in the project. Open the matching file, read the expected result beside the TODO, write the code, and run the focused check before moving on.
 
 ## Start here: your Python path
 
@@ -21,15 +21,30 @@ You do **not** need to edit the frontend for the core project. Follow this order
 | --- | --- | --- | --- |
 | 1 | `backend/sample_weather.py` | Explore the provided data. No TODO is needed here. | Print a city, temperature, and forecast day. |
 | 2 | `backend/weather_logic.py` | Complete TODO 1-4: forecast analysis. | `python -m pytest -q backend/tests/test_weather_logic.py -k ForecastAnalysis` |
-| 3 | `backend/weather_logic.py` | Complete TODO 5: city comparison. | `python -m pytest -q backend/tests/test_weather_logic.py -k Comparison` |
-| 4 | `backend/weather_logic.py` | Complete TODO 6: umbrella recommendation. | `python -m pytest -q backend/tests/test_weather_logic.py -k Umbrella` |
-| 5 | `backend/weather_logic.py` | Complete TODO 7-8: scientist data and summary. | Call both functions with the sample forecast. |
-| 6 | `backend/weather_logic.py` | Complete TODO 9-10: quiz answer and score. | `python -m pytest -q backend/tests/test_weather_logic.py -k Quiz` |
-| 7 | `backend/weather_service.py` | Complete TODO 11-13: city search and weather retrieval. | Test a real city and mocked failures. |
-| 8 | `backend/app.py` | Complete TODO 14-18: connect Flask routes. | Run endpoint tests and `curl` requests. |
-| 9 | `backend/tests/` | Add edge-case checks after the core work passes. | `python -m pytest -q` |
+| 3 | `backend/weather_logic.py` | Complete TODO 5: umbrella recommendation. | `python -m pytest -q backend/tests/test_weather_logic.py -k Umbrella` |
+| 4 | `backend/weather_service.py` | Complete TODO 6-8: city search and weather retrieval. | `python3 lessons/level_04_weather_api.py` |
+| 5 | `backend/app.py` | Complete TODO 9-11: connect the Flask routes. | `python3 lessons/level_05_flask_routes.py` |
+| 6 | `backend/tests/` and frontend | Run tests and demonstrate the finished app. | `python -m pytest -q` and `python3 lessons/level_06_final_check.py` |
 
 The frontend is your **viewer**. Its demo calculations are provided so the interface works offline; your assignment is to recreate the underlying calculations in Python and connect them through Flask.
+
+## Run the builder levels
+
+The `backend/lessons/` folder contains short runnable files in the same style as earlier Python exercises. Each level tells you which TODOs to complete, prints the current result, and checks whether the expected result was reached.
+
+From the repository root:
+
+```bash
+cd backend
+python3 lessons/level_01_weather_data.py
+python3 lessons/level_02_forecast_analysis.py
+python3 lessons/level_03_umbrella.py
+python3 lessons/level_04_weather_api.py
+python3 lessons/level_05_flask_routes.py
+python3 lessons/level_06_final_check.py
+```
+
+Levels 1-3 use the fictional dataset and work offline. Level 4 needs internet access for Open-Meteo. Levels 5-6 check Flask locally. Run the levels in order; when a level prints `COMPLETE`, move to the next one.
 
 ### How to recognize an unfinished task
 
@@ -59,7 +74,7 @@ Install Python 3.10 or newer. A browser is enough for demo mode. Git is recommen
 ## Get the project
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/MizeroR/weather-explorer-lab.git
 cd weather-explorer-lab
 ```
 
@@ -115,7 +130,7 @@ You should receive JSON containing `"status": "ok"`. Routes tied to unfinished T
 
 Keep the Flask server on port 5000 and the frontend server on port 5500. Open `http://localhost:5500`, then select **Switch to live**. The frontend calls `GET /api/weather?city=...`; it shows `LIVE DATA` only after a successful backend response. A failed live request is shown as an error and is never silently replaced with demo data.
 
-The remaining live routes are already named in `frontend/js/app.js` and scaffolded in Flask for the builder to connect as TODOs are completed: forecast, compare, umbrella, and quiz.
+The core live routes are scaffolded in Flask for the builder to connect as TODOs are completed: weather, forecast, and umbrella.
 
 ## Run tests
 
@@ -145,6 +160,8 @@ backend/weather_logic.py         Main builder Python exercises
 backend/sample_weather.py        Fictional offline practice data
 backend/tests/test_app.py        Runnable Flask boundary checks
 backend/tests/test_weather_logic.py  Guiding behavior tests
+backend/lessons/README.md        Runnable builder-level instructions
+backend/lessons/level_01...py    Guided level checkpoints
 docs/python-missions.md          Mission-by-mission learning guide
 ```
 
@@ -176,7 +193,7 @@ Demonstrate demo mode, health check, at least three completed Python missions, p
 
 ## Extensions
 
-Add a new city to the teaching data, write a new test before a new feature, add a weather-code dictionary, compare forecast averages, or allow the umbrella threshold to be changed by the user. Deployment can use any simple Python host that supports Flask; do not commit secrets or rely on a local-only URL in production.
+Add a new city to the teaching data, write a new test before a new feature, add a weather-code dictionary, compare two cities, or allow the umbrella threshold to be changed by the user. These are optional extensions after the core project is complete. Deployment can use any simple Python host that supports Flask; do not commit secrets or rely on a local-only URL in production.
 
 ## Data source
 

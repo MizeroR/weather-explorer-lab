@@ -11,7 +11,7 @@ FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 REQUEST_TIMEOUT = 10
 
 
-# TODO 11: backend/weather_service.py -> find_city
+# TODO 6: backend/weather_service.py -> find_city
 # Validate city_name, then call GEOCODING_URL with params
 # {"name": city_name, "count": 1, "language": "en", "format": "json"}.
 # Call response.raise_for_status(), inspect the results list, and return only
@@ -28,7 +28,7 @@ def find_city(city_name):
     raise NotImplementedError("Builder task: implement Open-Meteo geocoding")
 
 
-# TODO 12: backend/weather_service.py -> get_weather
+# TODO 7: backend/weather_service.py -> get_weather
 # Call FORECAST_URL with latitude, longitude, timezone=auto,
 # forecast_days=5, current weather fields, and daily fields including time,
 # temperature_2m_max, temperature_2m_min, precipitation_probability_max, and
@@ -45,7 +45,7 @@ def get_weather(latitude, longitude):
     raise NotImplementedError("Builder task: implement Open-Meteo forecast retrieval")
 
 
-# TODO 13: backend/weather_service.py -> get_weather_for_city
+# TODO 8: backend/weather_service.py -> get_weather_for_city
 # Call find_city(city_name), pass its coordinates to
 # get_weather, then add the selected city and country to the returned record.
 # This function should be the one Flask calls for a city's complete weather.

@@ -5,9 +5,6 @@ import unittest
 from backend.sample_weather import SAMPLE_WEATHER
 from backend.weather_logic import (
     calculate_average_temperature,
-    calculate_quiz_score,
-    check_quiz_answer,
-    compare_cities,
     find_coldest_day,
     find_hottest_day,
     find_wettest_day,
@@ -33,13 +30,6 @@ class ForecastAnalysisTests(unittest.TestCase):
         self.assertEqual(find_wettest_day(forecast)["date"], "b")
 
 
-class ComparisonTests(unittest.TestCase):
-    def test_compares_two_cities(self):
-        result = compare_cities(SAMPLE_WEATHER["Kigali"], SAMPLE_WEATHER["Nairobi"])
-        self.assertEqual(result["warmer_city"], "Kigali")
-        self.assertEqual(result["higher_wind_city"], "Nairobi")
-
-
 class UmbrellaTests(unittest.TestCase):
     def test_recommends_umbrella_at_or_above_threshold(self):
         result = umbrella_recommendation(40)
@@ -52,15 +42,6 @@ class UmbrellaTests(unittest.TestCase):
     def test_handles_missing_probability(self):
         result = umbrella_recommendation(None)
         self.assertIn("unknown", result["recommendation"].lower())
-
-
-class QuizTests(unittest.TestCase):
-    def test_answers_are_case_insensitive(self):
-        self.assertTrue(check_quiz_answer("  Rain  ", "rain"))
-
-    def test_counts_correct_answers(self):
-        self.assertEqual(calculate_quiz_score(["rain", "sun"], ["rain", "cloud"]), 1)
-
 
 if __name__ == "__main__":
     unittest.main()

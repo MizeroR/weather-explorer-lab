@@ -21,17 +21,13 @@ function render(record) {
   $('current-icon').textContent = weatherIcon(record.current.weather_code);
   $('current-detail').textContent = record.current.weather_code >= 51 ? 'A wet-weather reading. Keep an eye on the clouds.' : 'A bright reading with a good chance for exploring.';
   $('forecast-list').innerHTML = record.forecast.map(day => `<div class="forecast-row"><span class="date">${day.date.slice(5)}</span><strong>${day.temperature_max}°</strong><span>${day.temperature_min}°</span><span class="rain-dot" title="${day.precipitation_probability ?? 'unknown'}% rain chance"></span></div>`).join('');
-  const values = record.forecast.map(day => day.temperature_max); const max = Math.max(...values); 
-  $('chart').innerHTML = record.forecast.map(day => `<div class="bar" style="height:${Math.max(10, day.temperature_max / max * 100)}%"><span>${day.temperature_max}°</span><i>${day.date.slice(8)}</i></div>`).join('');
   const probabilities = record.forecast.map(day => day.precipitation_probability).filter(value => value !== null && value !== undefined);
   const highest = probabilities.length ? Math.max(...probabilities) : null;
   $('umbrella-result').textContent = highest === null ? 'Rain chance unknown' : highest >= 40 ? `Pack an umbrella (${highest}% chance)` : `Leave it at home (${highest}% chance)`;
-  $('chart-caption').textContent = `Five daily highs · average ${Math.round(values.reduce((sum, value) => sum + value, 0) / values.length)}°C`;
   $('status').textContent = liveMode ? 'Live readings from Flask + Open-Meteo.' : 'Sample readings loaded.';
   $('mode-label').textContent = liveMode ? 'LIVE DATA' : 'DEMO DATA';
 }
 async function refresh() { const city = $('city-input').value.trim(); $('error').hidden = true; $('status').textContent = 'Scanning the skies...'; try { const record = await loadWeather(city); if (!record) throw new Error(`No sample station found for “${city}”. Try Kigali, Nairobi, or London.`); render(record); } catch (error) { $('error').textContent = error.message; $('error').hidden = false; $('status').textContent = liveMode ? 'Live request failed.' : 'Ready for another station.'; } }
 $('search-form').addEventListener('submit', event => { event.preventDefault(); refresh(); });
 $('mode-toggle').addEventListener('click', () => { liveMode = !liveMode; $('mode-toggle').textContent = liveMode ? 'Switch to demo' : 'Switch to live'; $('mode-toggle').setAttribute('aria-pressed', liveMode); refresh(); });
-document.querySelectorAll('.choice').forEach(button => button.addEventListener('click', () => { $('quiz-score').textContent = `${button.dataset.answer === 'rain' ? 1 : 0} / 1`; button.style.borderColor = button.dataset.answer === 'rain' ? '#f7c948' : '#f2654d'; }));
 refresh();
